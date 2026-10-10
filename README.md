@@ -1,55 +1,52 @@
-# Comercial
+# Comercial imobiliário
 
-Módulo comercial imobiliário em desenvolvimento, baseado no levantamento das telas e dos fluxos de Gestão de Unidades, Pró-Vendas e Vendas do ERP de referência. Este repositório contém o escopo inicial; ainda não contém uma aplicação executável.
+Primeira versão independente de Gestão de Unidades, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
 
-## Objetivo
+## Executar
 
-Desenvolver um módulo separado, preparado para integração com o sistema existente. A tecnologia, autenticação, banco de dados e contratos de integração serão definidos após inspecionar o projeto principal.
+1. Instale o Node.js 24 ou mais recente e baixe este repositório.
+2. Na pasta do projeto, execute `node server.mjs`.
+3. Abra http://127.0.0.1:3210 no navegador.
 
-## Levantamento funcional
+No primeiro início, são criadas vinte unidades e uma reserva fictícias. Os dados persistem em `data/comercial.sqlite`; a pasta `data/` é ignorada pelo Git. Para encerrar, use Ctrl+C. A porta pode ser configurada pela variável de ambiente `PORT`.
 
-### Gestão de Unidades
+## Implementado
 
-- Cadastro vinculado a empreendimento, com identificação, áreas, fração ideal, localização, registro, endereço, valores e datas de entrega.
-- Controles separados de estoque comercial, legal e de obra.
-- Consulta por empresa, empreendimento, unidade, tipo de imóvel, localização e previsão de entrega.
-- Quadro Espelho com grade, lista, filtros e posição histórica.
-- Reservas vinculadas à unidade, cliente e corretor, com origem, data, validade e observação.
-- Parâmetros de reserva observados: obrigatoriedade de cliente, prazo, bloqueio de alteração da validade e consideração de dias úteis. Valores e comportamento efetivo ainda precisam ser validados.
+- Cadastro de unidades com empreendimento, torre, pavimento, área, preço e estoques comercial, legal e de obra separados.
+- Lista e Quadro Espelho por empreendimento, torre e pavimento, com filtros e busca.
+- Indicadores de estoque e valor disponível calculados a partir dos preços de referência.
+- Reservas com cliente, corretor, origem, validade e observação.
+- Bloqueio de reserva duplicada e de unidades com estoque comercial indisponível.
+- Validade inclusiva até o fim do dia em America/Sao_Paulo; vencimento reconciliado nas consultas e operações.
+- Cancelamento com manutenção de histórico e liberação da unidade.
+- Persistência SQLite, registro de eventos e API JSON para futura integração.
 
-### Pró-Vendas
+## Testes
 
-- Consultas de clientes, interesses e atendimentos.
-- Menus de agenda, colaboradores, captação, campanhas e oportunidades identificados; detalhes ainda precisam ser levantados.
-- Atendimentos: pendente, em andamento, realizado e cancelado.
-- Propostas vinculadas a empreendimento, unidade, cliente, corretor e imobiliária.
-- Situações de proposta observadas: em construção, em aprovação comercial, reprovada pelo comercial, em aprovação de crédito, aprovada, reprovada pelo crédito, contrato e vencida.
-- A abertura de novos clientes e propostas exige vínculo do usuário com um colaborador no ERP; os formulários completos não foram acessados no levantamento inicial.
+Execute `node --test tests/*.test.mjs`. Os testes verificam exclusividade, cancelamento, vencimento, validação, persistência e respostas da API.
 
-### Vendas
+## API inicial
 
-- Cadastro de contrato: empresa, empreendimento, unidade e cliente principais, datas, valores, plano financeiro e corretor.
-- Correção mensal ou anual; indexadores pré e pós-chaves; opções de juros Price, SAC, simples, composto, fixo e anual.
-- Campos de financiamento, entrega de chaves, registro do imóvel, observação e cláusula especial.
-- Situações de consulta: aguardando autorização, aguardando emissão, emitido e distratado.
-- Menus de aditivos, distratos, importação e alterações de contratos identificados; regras detalhadas pendentes.
-- Comissões com parcelas e situações: aguardando autorização, aguardando liberação, liberadas, pagas e canceladas.
-- Tabela de preços: associação de unidades por corretor, associação de corretor por unidade e emissão identificadas no menu.
+| Método | Rota | Comportamento |
+| --- | --- | --- |
+| GET | `/api/units` | Lista unidades e situação atual |
+| POST | `/api/units` | Cadastra unidade |
+| GET | `/api/reservations` | Lista reservas e histórico |
+| POST | `/api/reservations` | Reserva uma unidade disponível |
+| POST | `/api/reservations/:id/cancel` | Cancela reserva ativa |
 
-## Fluxo proposto para validação
+Exemplo de unidade: `{"project":"Exemplo","name":"A-101","tower":"A","floor":1,"area":68.5,"price":350000,"commercial":"Disponível","legal":"Livre","construction":"Projeto"}`.
 
-Cliente → Atendimento/Interesse → Proposta → Reserva → Contrato → Comissões.
+Exemplo de reserva: `{"unitId":"ID da unidade","client":"Cliente fictício","broker":"Corretor fictício","origin":"Vendas","expires":"2026-12-31","note":""}`.
 
-Essa sequência é uma proposta de organização do novo módulo. A ordem obrigatória, transições e efeitos sobre disponibilidade e financeiro devem ser validados antes da implementação.
+## Limites desta versão
 
-## Próximos passos
+Uso local para testes: o servidor escuta apenas em 127.0.0.1 e ainda não possui autenticação, perfis de acesso ou suporte de produção para múltiplos usuários. Clientes e corretores são textos nesta etapa; os vínculos cadastrais serão implementados no Pró-Vendas. Valores são preços de referência, sem cálculo de juros ou parcelas.
 
-1. Inspecionar o código do sistema principal e suas instruções de desenvolvimento.
-2. Definir interfaces de integração para empresas, empreendimentos, clientes, usuários e financeiro.
-3. Validar regras de disponibilidade, concorrência de reservas, aprovação, parcelamento, comissões e distratos.
-4. Implementar em etapas: unidades e reservas; clientes e atendimentos; propostas; contratos e comissões.
-5. Validar cálculos e transições com dados fictícios e apresentar alterações por pull request.
+Ainda pendentes: edição de unidades, posição histórica do Quadro Espelho, campos completos de registro e áreas, agenda, clientes, interesses, propostas e aprovações, contratos, distratos, comissões e integração financeira. Não há conexão automática com o ERP. As opções de estoque são um subconjunto inicial do levantamento.
 
-## Dados
+## Integração futura
 
-O levantamento registra funcionalidades, sem dados reais de clientes, contratos ou credenciais. Dados de demonstração devem ser fictícios.
+A camada de regras (`domain.mjs`) é separada da API (`server.mjs`) e da interface (`public/`). A integração com o projeto do escritório deverá definir identidade compartilhada, códigos de empresas e empreendimentos, clientes, corretores e contrato de comunicação com o financeiro. Alterar tecnologia deve preservar essas regras e seus testes.
+
+Use dados fictícios nos testes. Não publique banco de dados, credenciais ou dados reais no repositório.
