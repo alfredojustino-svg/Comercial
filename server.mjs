@@ -22,15 +22,15 @@ export function createServer(store) {
         if(req.method==='GET' && path==='/api/reservations')return send(200,store.listReservations());
         if(req.method==='POST' && path==='/api/reservations')return send(201,store.reserve(body));
         const cancel=path.match(/^\/api\/reservations\/([\w-]+)\/cancel$/);if(req.method==='POST'&&cancel){store.cancel(cancel[1]);return send(200,{ok:true});}
-        const collections={clients:['listClients','addClient'],activities:['listActivities','addActivity'],proposals:['listProposals','addProposal'],contracts:['listContracts'],commissions:['listCommissions']};
+        const collections={clients:['listClients','addClient'],activities:['listActivities','addActivity'],proposals:['listProposals','addProposal'],contracts:['listContracts'],commissions:['listCommissions','addCommission'],brokers:['listBrokers','addBroker'],interests:['listInterests','addInterest'],campaigns:['listCampaigns','addCampaign']};
         const collection=path.match(/^\/api\/([a-z]+)$/)?.[1];
         if(collections[collection]){const method=collections[collection][req.method==='GET'?0:1];if(!method)return send(405,{error:'Método não permitido.'});return send(req.method==='GET'?200:201,store[method](body));}
-        const action=path.match(/^\/api\/(activities|proposals|contracts|commissions)\/([\w-]+)\/(state|issue|terminate|details)$/);
-        if(action){const [,entity,id,operation]=action;const methods={'activities/state':'activityState','proposals/state':'proposalState','proposals/issue':'issueContract','contracts/terminate':'terminate','contracts/details':'details','commissions/state':'commissionState'};const method=methods[`${entity}/${operation}`];if(method&&req.method===(operation==='details'?'GET':'POST'))return send(200,store[method](id,body)||{ok:true});}
+        const action=path.match(/^\/api\/(clients|activities|proposals|contracts|commissions|interests|campaigns|commission-installments)\/([\w-]+)\/(state|issue|terminate|details|edit)$/);
+        if(action){const [,entity,id,operation]=action;const methods={'clients/edit':'editClient','activities/state':'activityState','proposals/state':'proposalState','proposals/issue':'issueContract','contracts/terminate':'terminate','contracts/details':'details','commissions/state':'commissionState','commissions/details':'commissionDetails','interests/state':'interestState','campaigns/state':'campaignState','commission-installments/state':'installmentState'};const method=methods[`${entity}/${operation}`];if(method&&req.method===(operation==='details'?'GET':'POST'))return send(200,store[method](id,body)||{ok:true});}
         return send(404,{error:'Rota não encontrada.'});
       }
       if(req.method!=='GET')return send(405,{error:'Método não permitido.'});
-      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/style.css':['style.css','text/css']};
+      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
       if(!assets[path])return send(404,{error:'Página não encontrada.'});
       const [file,type]=assets[path];const data=await readFile(join(publicDir,file));res.writeHead(200,{'Content-Type':`${type}; charset=utf-8`,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'"});res.end(data);
     }catch(e){if(!(e instanceof ValidationError))console.error(e);send(e.status||500,{error:e instanceof ValidationError?e.message:'Erro interno ao processar o pedido.'});}

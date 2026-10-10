@@ -51,5 +51,14 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     for(let floor=1;floor<=5;floor++)for(let position=1;position<=4;position++)addUnit({project:'Residencial Aurora • Demonstração',name:`A-${floor}0${position}`,tower:'A',floor,area:position%2?68.5:82,price:350000+floor*12000+position*8500,commercial:floor===1&&position===4?'Reserva técnica':'Disponível',legal:'Livre',construction:'Em Construção'});
     reserve({unitId:listUnits()[0].id,client:'Cliente Exemplo',broker:'Corretor Exemplo',origin:'Pró-Vendas',expires:clock(),note:'Reserva fictícia para demonstração.'});
   }
+  if(seed&&!flows.listClients().length){
+    const demoClient=flows.addClient({name:'Cliente Demonstração',email:'cliente@example.com',phone:'',source:'Campanha de lançamento'});
+    flows.addBroker({name:'Corretor Demonstração',email:'corretor@example.com',agency:'Imobiliária Exemplo'});
+    const future=new Date(`${clock()}T12:00:00Z`);future.setUTCDate(future.getUTCDate()+30);const due=future.toISOString().slice(0,10),available=listUnits().filter(u=>u.status==='Disponível');
+    flows.addActivity({clientId:demoClient.id,subject:'Visita ao apartamento decorado',owner:'Corretor Demonstração',due,note:'Atendimento fictício para testar a agenda.'});
+    flows.addCampaign({name:'Lançamento • Demonstração',channel:'Indicação / site',starts:clock(),ends:due});
+    if(available[0]){flows.addInterest({clientId:demoClient.id,project:available[0].project,type:'Apartamento',budget:450000,note:'Registro fictício.'});const proposal=flows.addProposal({clientId:demoClient.id,unitId:available[0].id,broker:'Corretor Demonstração',price:available[0].price,expires:due,note:'Proposta fictícia.'});for(const status of ['Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada'])flows.proposalState(proposal.id,{status});flows.issueContract(proposal.id,{count:12,firstDue:due,rate:3,commissionCount:3});}
+    if(available[1])flows.addProposal({clientId:demoClient.id,unitId:available[1].id,broker:'Corretor Demonstração',price:available[1].price,expires:due,note:'Proposta em elaboração para demonstração.'});
+  }
   return {...flows,listUnits,addUnit,reserve,cancel,listReservations,close:()=>db.close()};
 }

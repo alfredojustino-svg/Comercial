@@ -43,6 +43,21 @@ Rotas adicionais: `GET/POST /api/clients`, `GET/POST /api/activities`, `GET/POST
 
 As tabelas novas são criadas automaticamente ao abrir um banco da versão 0.1, preservando unidades e reservas existentes.
 
+## Comunicação visual e módulos — versão 0.3
+
+Interface baseada na organização visual das telas observadas do Sienge: barra superior branca, faixa escura de módulos, menu branco agrupado, indicação vermelha do item selecionado, ações azuis, filtros compactos, situações em botões e tabelas de consulta. O nome e a marca da aplicação continuam próprios.
+
+- Pró-Vendas: clientes com edição, interesses com orçamento e situação, atendimentos, agenda por data, corretores/imobiliárias, campanhas com canal de captação e oportunidades derivadas de interesses em negociação.
+- Vendas: consulta e emissão de contrato a partir de proposta aprovada, parcelas e histórico, distratos.
+- Comissões: cadastro manual em contrato sem comissão, percentual, parcelamento mensal, análise e mudança de situação por parcela. Comissão automática de contrato também ganha parcelas. O status geral reflete as parcelas pendentes. Se as parcelas estiverem em situações diferentes, a atualização em lote é bloqueada.
+- Pagamento de qualquer parcela de comissão bloqueia o distrato, mesmo quando outras parcelas ainda não foram autorizadas.
+- Consulta, filtros por situação, escolha de colunas, densidade da tabela e exportação CSV dos dados visíveis.
+- Ao iniciar com dados de demonstração e sem clientes, o programa inclui cliente, corretor, campanha, interesse, atendimento, proposta e contrato fictícios.
+
+As campanhas e oportunidades são funcionalidades iniciais próprias; ainda não reproduzem todas as regras do ERP. Não foram implementados múltiplos beneficiários por contrato, aditivos, índices, juros, liquidação de parcelas da venda, integração bancária nem perfis de aprovação.
+
+Novas rotas: `GET/POST /api/brokers`, `GET/POST /api/interests`, `POST /api/interests/:id/state`, `GET/POST /api/campaigns`, `POST /api/campaigns/:id/state`, `POST /api/clients/:id/edit`, `POST /api/commissions`, `GET /api/commissions/:id/details`, `POST /api/commission-installments/:id/state`.
+
 ## API inicial
 
 | Método | Rota | Comportamento |
