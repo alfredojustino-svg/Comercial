@@ -1,5 +1,6 @@
 import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
+import { workflow } from './workflow.mjs';
 
 export const commercialStatuses = ['Disponível', 'Reserva técnica', 'Permuta', 'Mútuo', 'Transferido', 'Vendido/terceiros'];
 export const legalStatuses = ['Livre', 'Escriturado', 'Caucionado', 'Hipotecado', 'Penhorado', 'Alienação fiduciária', 'Não informado'];
@@ -23,7 +24,8 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
   const expire=()=>db.prepare("UPDATE reservations SET status='Vencida' WHERE status='Ativa' AND expires < ?").run(clock());
   const getUnit=id=> { const unit=db.prepare('SELECT * FROM units WHERE id=?').get(id); if(!unit) throw new ValidationError('Unidade não encontrada.',404); return unit; };
   const unitView=row=>({...row,price:row.price_cents/100,status:row.reservation_id?'Reservada':row.commercial});
-  function listUnits() {expire();return db.prepare("SELECT u.*, r.id reservation_id FROM units u LEFT JOIN reservations r ON u.id=r.unit_id AND r.status='Ativa' ORDER BY project,tower,floor,name").all().map(unitView);}
+  const flows=workflow(db,clock,event);
+  function listUnits() {expire();flows.expire();return db.prepare("SELECT u.*, r.id reservation_id, p.id proposal_id FROM units u LEFT JOIN reservations r ON u.id=r.unit_id AND r.status='Ativa' LEFT JOIN proposals p ON p.unit_id=u.id AND p.status IN ('Em Construção','Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada') ORDER BY project,tower,floor,name").all().map(row=>({...unitView(row),status:row.proposal_id?'Proposta':unitView(row).status}));}
   function addUnit(input) {
     const id=randomUUID(),project=required(input.project,'Empreendimento'),name=required(input.name,'Unidade',40),tower=required(input.tower,'Torre',40);
     const floor=amount(input.floor,'Pavimento');if(!Number.isInteger(floor)||floor>200) throw new ValidationError('Pavimento deve ser inteiro de 0 a 200.');
@@ -38,6 +40,7 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     const note=typeof input.note==='string'?input.note.trim():'';if(note.length>1000)throw new ValidationError('Observação deve ter até 1000 caracteres.');
     db.exec('BEGIN IMMEDIATE');try {
       expire();const unit=getUnit(input.unitId);if(unit.commercial!=='Disponível')throw new ValidationError('Esta unidade não está disponível para reserva.',409);
+      flows.expire();if(db.prepare("SELECT id FROM proposals WHERE unit_id=? AND status IN ('Em Construção','Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada')").get(input.unitId))throw new ValidationError('Esta unidade possui uma proposta aberta.',409);
       if(db.prepare("SELECT id FROM reservations WHERE unit_id=? AND status='Ativa'").get(input.unitId))throw new ValidationError('Esta unidade já está reservada.',409);
       const id=randomUUID();db.prepare('INSERT INTO reservations VALUES(?,?,?,?,?,?,?,?,?)').run(id,input.unitId,client,broker,origin,clock(),expires,'Ativa',note);event(id,'Reserva criada');db.exec('COMMIT');return {id};
     }catch(e){db.exec('ROLLBACK');throw e;}
@@ -48,5 +51,5 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     for(let floor=1;floor<=5;floor++)for(let position=1;position<=4;position++)addUnit({project:'Residencial Aurora • Demonstração',name:`A-${floor}0${position}`,tower:'A',floor,area:position%2?68.5:82,price:350000+floor*12000+position*8500,commercial:floor===1&&position===4?'Reserva técnica':'Disponível',legal:'Livre',construction:'Em Construção'});
     reserve({unitId:listUnits()[0].id,client:'Cliente Exemplo',broker:'Corretor Exemplo',origin:'Pró-Vendas',expires:clock(),note:'Reserva fictícia para demonstração.'});
   }
-  return {listUnits,addUnit,reserve,cancel,listReservations,close:()=>db.close()};
+  return {...flows,listUnits,addUnit,reserve,cancel,listReservations,close:()=>db.close()};
 }
