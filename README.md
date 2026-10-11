@@ -1,6 +1,6 @@
 # Comercial imobiliário
 
-Versão 0.4 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+Versão 0.4.1 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
 
 O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
 
@@ -9,6 +9,10 @@ O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), 
 Contratos com várias unidades e clientes, abas cadastrais, autorização e emissão; condições e cronograma de parcelas; comissões com vários corretores, autorização, liberação e baixa manual; aditivos com aprovação; distratos com cálculo local de devolução; tabelas de preço e cadastros de apoio; importação com prévia e alteração de datas. A navegação segue os grupos e a comunicação visual observados no Sienge.
 
 Consulte [a cobertura e as diferenças desta versão](docs/cobertura-v0.4.md). Os capítulos 0.2 e 0.3 abaixo são históricos; a implementação nova de Vendas amplia esses fluxos.
+
+## Revisão de integração 0.4.1
+
+O [diagnóstico de integração](docs/diagnostico-integracao.md) registra as conexões entre todas as áreas e as pendências. A revisão unifica as APIs antiga/nova de contratos e comissões, vincula reservas e propostas aos cadastros, permite converter reserva em proposta e corrige estoque, aditivos pendentes e filtros. 33 testes aprovados.
 
 ## Executar
 

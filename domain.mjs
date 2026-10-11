@@ -26,6 +26,7 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
   const getUnit=id=> { const unit=db.prepare('SELECT * FROM units WHERE id=?').get(id); if(!unit) throw new ValidationError('Unidade não encontrada.',404); return unit; };
   const unitView=row=>({...row,price:row.price_cents/100,status:row.reservation_id?'Reservada':row.commercial});
   const flows=workflow(db,clock,event);
+  for(const column of ['client_id','broker_id'])if(!db.prepare('PRAGMA table_info(reservations)').all().some(c=>c.name===column))db.exec(`ALTER TABLE reservations ADD COLUMN ${column} TEXT REFERENCES ${column==='client_id'?'clients':'brokers'}(id)`);
   function listUnits() {expire();flows.expire();return db.prepare("SELECT u.*, r.id reservation_id, p.id proposal_id FROM units u LEFT JOIN reservations r ON u.id=r.unit_id AND r.status='Ativa' LEFT JOIN proposals p ON p.unit_id=u.id AND p.status IN ('Em Construção','Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada') ORDER BY project,tower,floor,name").all().map(row=>({...unitView(row),status:row.proposal_id?'Proposta':unitView(row).status}));}
   function addUnit(input) {
     const id=randomUUID(),project=required(input.project,'Empreendimento'),name=required(input.name,'Unidade',40),tower=required(input.tower,'Torre',40);
@@ -36,18 +37,19 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     event(id,'Unidade cadastrada'); return unitView(getUnit(id));
   }
   function reserve(input) {
-    const client=required(input.client,'Cliente'),broker=required(input.broker,'Corretor'),origin=member(input.origin,['Vendas','Pró-Vendas','Proposta'],'Origem');
+    const linked=(table,id)=>{const row=db.prepare(`SELECT * FROM ${table} WHERE id=?`).get(id);if(!row)throw new ValidationError('Cliente ou corretor não encontrado.',404);return row;};
+    const client=required(input.clientId?linked('clients',input.clientId).name:input.client,'Cliente'),broker=required(input.brokerId?linked('brokers',input.brokerId).name:input.broker,'Corretor'),origin=member(input.origin,['Vendas','Pró-Vendas','Proposta'],'Origem');
     const expires=date(input.expires,'Validade');if(expires<clock())throw new ValidationError('A validade não pode estar no passado.');
     const note=typeof input.note==='string'?input.note.trim():'';if(note.length>1000)throw new ValidationError('Observação deve ter até 1000 caracteres.');
     db.exec('BEGIN IMMEDIATE');try {
       expire();const unit=getUnit(input.unitId);if(unit.commercial!=='Disponível')throw new ValidationError('Esta unidade não está disponível para reserva.',409);
       flows.expire();if(db.prepare("SELECT id FROM proposals WHERE unit_id=? AND status IN ('Em Construção','Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada')").get(input.unitId))throw new ValidationError('Esta unidade possui uma proposta aberta.',409);
       if(db.prepare("SELECT id FROM reservations WHERE unit_id=? AND status='Ativa'").get(input.unitId))throw new ValidationError('Esta unidade já está reservada.',409);
-      const id=randomUUID();db.prepare('INSERT INTO reservations VALUES(?,?,?,?,?,?,?,?,?)').run(id,input.unitId,client,broker,origin,clock(),expires,'Ativa',note);event(id,'Reserva criada');db.exec('COMMIT');return {id};
+      const id=randomUUID();db.prepare('INSERT INTO reservations(id,unit_id,client,broker,origin,created,expires,status,note,client_id,broker_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(id,input.unitId,client,broker,origin,clock(),expires,'Ativa',note,input.clientId||null,input.brokerId||null);event(id,'Reserva criada');db.exec('COMMIT');return {id};
     }catch(e){db.exec('ROLLBACK');throw e;}
   }
   function cancel(id) {expire();const result=db.prepare("UPDATE reservations SET status='Cancelada' WHERE id=? AND status='Ativa'").run(id);if(!result.changes)throw new ValidationError('Reserva inexistente ou não está ativa.',409);event(id,'Reserva cancelada');}
-  function listReservations() {expire();return db.prepare('SELECT r.*,u.name unit,u.project,u.tower FROM reservations r JOIN units u ON u.id=r.unit_id ORDER BY r.created DESC,r.rowid DESC').all();}
+  function listReservations() {expire();return db.prepare('SELECT r.*,COALESCE(c.name,r.client) client,COALESCE(b.name,r.broker) broker,u.name unit,u.project,u.tower FROM reservations r JOIN units u ON u.id=r.unit_id LEFT JOIN clients c ON c.id=r.client_id LEFT JOIN brokers b ON b.id=r.broker_id ORDER BY r.created DESC,r.rowid DESC').all();}
   if(seed && !db.prepare('SELECT COUNT(*) count FROM units').get().count) {
     for(let floor=1;floor<=5;floor++)for(let position=1;position<=4;position++)addUnit({project:'Residencial Aurora • Demonstração',name:`A-${floor}0${position}`,tower:'A',floor,area:position%2?68.5:82,price:350000+floor*12000+position*8500,commercial:floor===1&&position===4?'Reserva técnica':'Disponível',legal:'Livre',construction:'Em Construção'});
     reserve({unitId:listUnits()[0].id,client:'Cliente Exemplo',broker:'Corretor Exemplo',origin:'Pró-Vendas',expires:clock(),note:'Reserva fictícia para demonstração.'});
