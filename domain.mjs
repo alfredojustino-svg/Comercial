@@ -1,6 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
 import { workflow } from './workflow.mjs';
+import { sales } from './sales.mjs';
 
 export const commercialStatuses = ['Disponível', 'Reserva técnica', 'Permuta', 'Mútuo', 'Transferido', 'Vendido/terceiros'];
 export const legalStatuses = ['Livre', 'Escriturado', 'Caucionado', 'Hipotecado', 'Penhorado', 'Alienação fiduciária', 'Não informado'];
@@ -60,5 +61,6 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     if(available[0]){flows.addInterest({clientId:demoClient.id,project:available[0].project,type:'Apartamento',budget:450000,note:'Registro fictício.'});const proposal=flows.addProposal({clientId:demoClient.id,unitId:available[0].id,broker:'Corretor Demonstração',price:available[0].price,expires:due,note:'Proposta fictícia.'});for(const status of ['Em Aprovação Comercial','Em Aprovação de Crédito','Aprovada'])flows.proposalState(proposal.id,{status});flows.issueContract(proposal.id,{count:12,firstDue:due,rate:3,commissionCount:3});}
     if(available[1])flows.addProposal({clientId:demoClient.id,unitId:available[1].id,broker:'Corretor Demonstração',price:available[1].price,expires:due,note:'Proposta em elaboração para demonstração.'});
   }
-  return {...flows,listUnits,addUnit,reserve,cancel,listReservations,close:()=>db.close()};
+  const core={...flows,listUnits,addUnit,reserve,cancel,listReservations};
+  return {...core,...sales(db,clock,core),close:()=>db.close()};
 }

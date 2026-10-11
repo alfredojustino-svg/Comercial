@@ -16,7 +16,9 @@ export function createServer(store) {
           if(req.headers.origin && req.headers.origin!==`http://${req.headers.host}`)return send(403,{error:'Origem não permitida.'});
           if(!req.headers['content-type']?.startsWith('application/json'))return send(415,{error:'Envie JSON.'});
         }
-        let body={};if(req.method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>16000)throw new ValidationError('Pedido muito grande.',413);}try{body=JSON.parse(raw);}catch{throw new ValidationError('JSON inválido.',400);}if(!body||typeof body!=='object'||Array.isArray(body))throw new ValidationError('Objeto JSON esperado.',400);}
+        let body={};if(req.method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>1048576)throw new ValidationError('Pedido muito grande.',413);}try{body=JSON.parse(raw);}catch{throw new ValidationError('JSON inválido.',400);}if(!body||typeof body!=='object'||Array.isArray(body))throw new ValidationError('Objeto JSON esperado.',400);}
+        const salesRoute=path.match(/^\/api\/sales\/([a-zA-Z]+)(?:\/([\w-]+)\/(details|action|receipt|history))?$/);
+        if(salesRoute){const [,kind,id,action]=salesRoute;if(id){if(req.method==='GET'&&action==='details')return send(200,store.salesGet(kind,id));if(req.method==='GET'&&action==='history')return send(200,store.salesHistory(id));if(req.method==='POST'&&action==='action')return send(200,store.salesAction(kind,id,body));if(kind==='contracts'&&req.method==='POST'&&action==='receipt')return send(200,store.salesReceipt(id,body));}else{const operations={schedule:'salesSchedule',terminationPreview:'salesTerminationPreview',terminate:'salesTerminate',bulk:'salesBulk',importPreview:'salesImportPreview',import:'salesImport',report:'salesReport'};if(req.method==='POST'&&operations[kind])return send(200,store[operations[kind]](kind==='schedule'?body.conditions:body));if(req.method==='GET')return send(200,store.salesList(kind));if(req.method==='POST')return send(201,store.salesSave(kind,body));}return send(405,{error:'Método não permitido.'});}
         if(req.method==='GET' && path==='/api/units')return send(200,store.listUnits());
         if(req.method==='POST' && path==='/api/units')return send(201,store.addUnit(body));
         if(req.method==='GET' && path==='/api/reservations')return send(200,store.listReservations());
@@ -30,7 +32,7 @@ export function createServer(store) {
         return send(404,{error:'Rota não encontrada.'});
       }
       if(req.method!=='GET')return send(405,{error:'Método não permitido.'});
-      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
+      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/sales-ui.js':['sales-ui.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
       if(!assets[path])return send(404,{error:'Página não encontrada.'});
       const [file,type]=assets[path];const data=await readFile(join(publicDir,file));res.writeHead(200,{'Content-Type':`${type}; charset=utf-8`,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'"});res.end(data);
     }catch(e){if(!(e instanceof ValidationError))console.error(e);send(e.status||500,{error:e instanceof ValidationError?e.message:'Erro interno ao processar o pedido.'});}
