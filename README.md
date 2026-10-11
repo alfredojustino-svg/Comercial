@@ -1,6 +1,8 @@
 # Comercial imobiliário
 
-Versão 0.2 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+Versão 0.3 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+
+O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
 
 ## Executar
 
