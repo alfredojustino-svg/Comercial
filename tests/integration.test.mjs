@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createStore} from '../domain.mjs';
+import {createStore} from './fixtures.mjs';
 import {createServer} from '../server.mjs';
 
 function setup(file=':memory:'){
@@ -98,7 +98,7 @@ test('relatórios respeitam empreendimento e corretor sem duplicar VGV no rankin
     const r=s.salesReport({project:u.project,brokerId:b.id});assert.equal(r.contracts.length,1);assert.equal(r.commissions.length,1);assert.equal(r.units.length,2);assert.equal(r.totals.vgv,1000);
     assert.equal(s.salesReport({project:'P2',brokerId:b.id}).totals.count,0);
     const free=s.addUnit({project:'P1',name:'103',tower:'A',floor:1,area:60,price:1000,commercial:'Disponível',legal:'Livre',construction:'Projeto'});
-    let d=s.salesSave('contracts',{company:'E',project:'P1',code:'MULTI',date:'2026-10-11',amount:1000,clients:[{id:c.id,share:100,main:true}],units:[{id:free.id,share:100,main:true}],brokers:[{id:b.id},{id:b2.id}],conditions:[{type:'PM',amount:1000,count:1,firstDue:'2027-01-01'}]});
+    let d=s.salesSave('contracts',{delivery:'2027-01-01',accountingDate:'2026-10-11',salePrice:1000,correction:'Mensal',plans:[{plan:'test-plan',share:100,main:true}],company:'E',project:'P1',code:'MULTI',date:'2026-10-11',amount:1000,clients:[{id:c.id,share:100,main:true}],units:[{id:free.id,share:100,main:true}],brokers:[{id:b.id},{id:b2.id}],conditions:[{type:'PM',amount:1000,count:1,firstDue:'2027-01-01'}]});
     d=s.salesAction('contracts',d.id,{revision:d.revision,action:'authorize'});s.salesAction('contracts',d.id,{revision:d.revision,action:'issue'});
     assert.equal(s.salesReport().ranking.reduce((sum,r)=>sum+r.value,0),s.salesReport().totals.vgv);
   }finally{s.close();}

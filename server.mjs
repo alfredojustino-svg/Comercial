@@ -32,7 +32,7 @@ export function createServer(store) {
         return send(404,{error:'Rota não encontrada.'});
       }
       if(req.method!=='GET')return send(405,{error:'Método não permitido.'});
-      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/sales-ui.js':['sales-ui.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
+      const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/form-validation.mjs':['form-validation.mjs','text/javascript'],'/sales-ui.js':['sales-ui.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
       if(!assets[path])return send(404,{error:'Página não encontrada.'});
       const [file,type]=assets[path];const data=await readFile(join(publicDir,file));res.writeHead(200,{'Content-Type':`${type}; charset=utf-8`,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'"});res.end(data);
     }catch(e){if(!(e instanceof ValidationError))console.error(e);send(e.status||500,{error:e instanceof ValidationError?e.message:'Erro interno ao processar o pedido.'});}

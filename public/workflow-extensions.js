@@ -6,7 +6,7 @@ export function extensions({api,e,money,dateLabel,open,field,select,refresh,toas
   const button=(label,id,status)=>`<button class="link-button" data-extra-id="${id}" data-extra-state="${status}">${label}</button>`;
   function create(units){const options=data.clients.map(c=>[c.id,c.name]);
     if(current==='brokers')open('Cadastro de corretor',field('Nome','name')+field('Imobiliária','agency','text','Autônomo')+field('E-mail','email','email').replace('required','')+field('Telefone','phone').replace('required',''),b=>api('brokers',b));
-    if(current==='agenda')open('Cadastro de atendimento',select('Cliente','clientId',options)+field('Atividade','subject')+field('Responsável','owner')+field('Data','due','date')+field('Observação','note'),b=>api('activities',b));
+    if(current==='agenda')open('Cadastro de atendimento',select('Cliente','clientId',options)+field('Atividade','subject')+field('Responsável','owner')+field('Data','due','date')+field('Observação','note').replace('required',''),b=>api('activities',b));
     if(['interests','opportunities'].includes(current))open('Cadastro de interesse',select('Cliente','clientId',options)+select('Empreendimento','project',[...new Set(units.map(u=>u.project))].map(p=>[p,p]))+field('Tipo de imóvel','type','text','Apartamento')+field('Orçamento (R$)','budget','number')+field('Observação','note'),b=>api('interests',{...b,budget:Number(b.budget)}));
     if(current==='campaigns')open('Cadastro de campanha',field('Campanha','name')+field('Local de captação / Canal','channel')+field('Início','starts','date')+field('Fim','ends','date'),b=>api('campaigns',b));
   }
