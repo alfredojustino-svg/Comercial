@@ -4,6 +4,10 @@ Versão 0.7.0 com Comercial, Contabilidade e Financeiro integrados, baseada no l
 
 O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
 
+## Cobertura do Financeiro
+
+O [levantamento das divisões do Financeiro](docs/levantamento-financeiro-divisoes.md) compara todos os ramos de Contas a Pagar e Contas a Receber observados no menu do Sienge com a versão 0.7.0. O Financeiro continua parcial: integração dos fluxos entregues não significa reprodução completa do ERP.
+
 ## Integração 0.7.0
 
 Baixas de contratos e comissões pela interface seguem para o Financeiro. Distratos geram devoluções a pagar, com baixa parcial e estorno compartilhados. Origens contabilizadas exigem estorno antes de alterações; uma origem estornada pode ser contabilizada novamente preservando o histórico. A tela Financeiro → Conferência de Integrações mostra classificação pendente, diferenças bancárias e pagamentos antigos sem vínculo. 69 testes aprovados. Veja [o fechamento da integração e os limites](docs/fechamento-integracao.md).

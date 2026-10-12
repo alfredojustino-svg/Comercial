@@ -1,5 +1,7 @@
 # Financeiro — primeira versão
 
+Documento histórico da versão 0.6.0. Consulte o [levantamento atualizado das divisões](levantamento-financeiro-divisoes.md) e o [fechamento da integração 0.7.0](fechamento-integracao.md). A versão 0.7.0 acrescentou devoluções de distratos; as limitações da primeira etapa descritas abaixo pertencem à versão 0.6.0.
+
 Versão 0.6.0, 12/10/2026. Módulo separado de Comercial e Contabilidade no menu, no mesmo repositório e banco local.
 
 ## Levantamento no Sienge
