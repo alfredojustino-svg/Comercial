@@ -1,6 +1,6 @@
 # Comercial imobiliário
 
-Versão 0.5.0 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+Versão 0.6.0 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
 
 O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
 
@@ -103,3 +103,7 @@ Use dados fictícios nos testes. Não publique banco de dados, credenciais ou da
 ## Contabilidade — versão 0.5.0
 
 Plano de contas, lotes por empresa/período, lançamentos com partidas, contabilização, estorno, Diário, Razão e Balancete. Integração explícita com contratos emitidos e baixas de comissões, com escolha de contas e prevenção de duplicidade. Campos obrigatórios são validados na tela e API; lotes fechados bloqueiam escrita. Escopo implementado e recursos restantes em [docs/contabilidade.md](docs/contabilidade.md).
+
+## Financeiro — versão 0.6.0
+
+Módulo separado no menu: Contas a Receber, Contas a Pagar, Caixa e Bancos, Credores, Baixas e Estornos, Transferências, Extrato, Fluxo de Caixa e Inadimplência. Parcelas de contratos/comissões usam os mesmos registros do Comercial; operações financeiras são origens para classificação explícita na Contabilidade. Baixas, estornos e transferências são transacionais e têm prevenção de duplicidade. São registros locais, sem conexão bancária ou ERP. Escopo e limitações em [docs/financeiro.md](docs/financeiro.md).

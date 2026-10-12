@@ -17,6 +17,8 @@ export function createServer(store) {
           if(!req.headers['content-type']?.startsWith('application/json'))return send(415,{error:'Envie JSON.'});
         }
         let body={};if(req.method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>1048576)throw new ValidationError('Pedido muito grande.',413);}try{body=JSON.parse(raw);}catch{throw new ValidationError('JSON inválido.',400);}if(!body||typeof body!=='object'||Array.isArray(body))throw new ValidationError('Objeto JSON esperado.',400);}
+        const financeRoute=path.match(/^\/api\/finance\/([a-zA-Z]+)(?:\/([\w-]+)\/(action|history))?$/);
+        if(financeRoute){const [,kind,id,action]=financeRoute;if(id&&action==='action'&&req.method==='POST')return send(200,store.financeAction(kind,id,body));if(id&&action==='history'&&req.method==='GET')return send(200,store.financeHistory(id));if(!id&&req.method==='POST'&&kind==='settle')return send(200,store.financeSettle(body));if(!id&&req.method==='POST'&&kind==='transfer')return send(200,store.financeTransfer(body));if(!id&&req.method==='POST'&&kind==='report')return send(200,store.financeReport(body));if(!id&&req.method==='GET')return send(200,store.financeList(kind));if(!id&&req.method==='POST')return send(201,store.financeSave(kind,body));return send(405,{error:'Método não permitido.'});}
         const accountingRoute=path.match(/^\/api\/accounting\/([a-zA-Z]+)(?:\/([\w-]+)\/(action|history))?$/);
         if(accountingRoute){const [,kind,id,action]=accountingRoute;if(id&&action==='action'&&req.method==='POST')return send(200,store.accountingAction(kind,id,body));if(id&&action==='history'&&req.method==='GET')return send(200,store.accountingHistory(id));if(!id&&kind==='report'&&req.method==='POST')return send(200,store.accountingReport(body));if(!id&&req.method==='GET')return send(200,store.accountingList(kind));if(!id&&req.method==='POST')return send(201,store.accountingSave(kind,body));return send(405,{error:'Método não permitido.'});}
         const salesRoute=path.match(/^\/api\/sales\/([a-zA-Z]+)(?:\/([\w-]+)\/(details|action|receipt|history))?$/);
@@ -36,6 +38,7 @@ export function createServer(store) {
       if(req.method!=='GET')return send(405,{error:'Método não permitido.'});
       const assets={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/form-validation.mjs':['form-validation.mjs','text/javascript'],'/sales-ui.js':['sales-ui.js','text/javascript'],'/workflow-ui.js':['workflow-ui.js','text/javascript'],'/workflow-extensions.js':['workflow-extensions.js','text/javascript'],'/style.css':['style.css','text/css']};
       assets['/accounting-ui.js']=['accounting-ui.js','text/javascript'];
+      assets['/finance-ui.js']=['finance-ui.js','text/javascript'];
       if(!assets[path])return send(404,{error:'Página não encontrada.'});
       const [file,type]=assets[path];const data=await readFile(join(publicDir,file));res.writeHead(200,{'Content-Type':`${type}; charset=utf-8`,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'"});res.end(data);
     }catch(e){if(!(e instanceof ValidationError))console.error(e);send(e.status||500,{error:e instanceof ValidationError?e.message:'Erro interno ao processar o pedido.'});}

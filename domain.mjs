@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { workflow } from './workflow.mjs';
 import { sales } from './sales.mjs';
 import { accounting } from './accounting.mjs';
+import { finance } from './finance.mjs';
 import {missingRequired} from './public/form-validation.mjs';
 
 export const commercialStatuses = ['Disponível', 'Reserva técnica', 'Permuta', 'Mútuo', 'Transferido', 'Vendido/terceiros'];
@@ -70,5 +71,7 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
   }
   const core={...flows,listUnits,addUnit,reserve,cancel,listReservations};
   const commercial={...core,...sales(db,clock,core)};
-  return {...commercial,...accounting(db,clock,commercial,ValidationError),close:()=>db.close()};
+  Object.assign(commercial,accounting(db,clock,commercial,ValidationError));
+  Object.assign(commercial,finance(db,clock,commercial,ValidationError));
+  return {...commercial,close:()=>db.close()};
 }
