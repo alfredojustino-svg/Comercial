@@ -1,0 +1,1183 @@
+{
+  "date": "2026-10-12",
+  "baseline": "0.7.0",
+  "scope": "Menus de Contas a Receber e Contas a Pagar; formulários principais; sem homologação de fluxos completos",
+  "entries": [
+    {
+      "area": "Receber",
+      "division": "Principal",
+      "name": "Dashboard",
+      "route": "financeiro/contas-receber/dashboard",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Principal",
+      "name": "Títulos",
+      "route": "common/page/9071",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Principal",
+      "name": "Consulta de parcelas",
+      "route": "financeiro/contas-receber/consulta-parcelas",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa",
+      "name": "Inclusão",
+      "route": "common/page/1601",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa",
+      "name": "Alteração/Exclusão",
+      "route": "common/page/1721",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa / Leitura CIELO",
+      "name": "Identificação de Parcelas",
+      "route": "common/page/7810",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa / Leitura CIELO",
+      "name": "Leitura",
+      "route": "common/page/4914",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa / Importação de Arquivos",
+      "name": "Identificação de Contratos",
+      "route": "common/page/7534",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Baixa / Importação de Arquivos",
+      "name": "Leitura do Arquivo Crédito Associativo",
+      "route": "common/page/7317",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Reparcelamento novo",
+      "route": "financeiro/contas-receber/reparcelamentos/reparcelamento",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Inclusão anterior",
+      "route": "common/page/1047",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Exclusão",
+      "route": "common/page/1057",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Relatório anterior",
+      "route": "common/page/2458",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Relatório novo",
+      "route": "financeiro/contas-receber/reparcelamentos/relatorio",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reparcelamentos",
+      "name": "Gestão de Simulações",
+      "route": "common/page/8792",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reajuste Programado",
+      "name": "Inclusão",
+      "route": "common/page/7605",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Reajuste Programado",
+      "name": "Exclusão",
+      "route": "common/page/7628",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Acompanhamento Correção Monetária",
+      "route": "common/page/3934",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Alocação de Parcelas",
+      "route": "common/page/1686",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Alteração na Taxa Administrativa",
+      "route": "common/page/5609",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Distratos",
+      "route": "common/page/1820",
+      "status": "Parcial no Comercial"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Importação de Títulos",
+      "route": "financeiro/contas-receber/outras-funcoes/importar-titulos",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Entrega de Chaves Inclusão",
+      "route": "common/page/3876",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Entrega de Chaves Exclusão",
+      "route": "common/page/3881",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Quitações",
+      "route": "common/page/1913",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Repactuações",
+      "route": "common/page/1898",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Substituições",
+      "route": "common/page/1638",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Outras Funções",
+      "name": "Reenvio de E-mail",
+      "route": "common/page/8501",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Geração de Arquivo Remessa",
+      "route": "common/page/1919",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Impressão de 2ª Via",
+      "route": "common/page/5607",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Leitura",
+      "route": "common/page/1127",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Situação das Parcelas",
+      "route": "common/page/1784",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Rateio de Crédito",
+      "route": "common/page/7589",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Download de Arquivo Remessa",
+      "route": "common/page/8103",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural",
+      "name": "Notificação de Cobrança",
+      "route": "common/page/8297",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural / Configuração",
+      "name": "Cadastro de Mensagens",
+      "route": "common/page/7771",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural / Configuração",
+      "name": "Configuração de Layout",
+      "route": "common/page/8630",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural / Configuração",
+      "name": "Configuração da Cobrança Escritural",
+      "route": "common/page/8232",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cobrança Escritural / Configuração",
+      "name": "Configuração de Envio de E-mail",
+      "route": "common/page/4940",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência",
+      "name": "Inadimplência",
+      "route": "common/page/1829",
+      "status": "Parcial"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência",
+      "name": "Títulos em Cobrança",
+      "route": "common/page/1939",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência",
+      "name": "Configuração",
+      "route": "common/page/7012",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência",
+      "name": "Configuração de Notificação de Inadimplência",
+      "route": "common/page/8095",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência / Serasa",
+      "name": "Configuração",
+      "route": "common/page/7198",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência / Serasa",
+      "name": "Exportação PEFIN",
+      "route": "common/page/5896",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência / Serasa",
+      "name": "Remessa Informacional",
+      "route": "common/page/5912",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Inadimplência / Serasa",
+      "name": "Leitura PEFIN",
+      "route": "common/page/5915",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Condomínios",
+      "name": "Títulos",
+      "route": "common/page/2933",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Condomínios",
+      "name": "Geração de Parcelas",
+      "route": "common/page/2944",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cessão de Direitos",
+      "name": "Solicitação",
+      "route": "common/page/2063",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Cessão de Direitos",
+      "name": "Aprovação",
+      "route": "common/page/5065",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Cheques Recebidos",
+      "name": "Operação com Cheques",
+      "route": "common/page/5692",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Cheques Recebidos",
+      "name": "Situação dos Cheques",
+      "route": "common/page/5690",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Controle de Cheques Recebidos",
+      "name": "Recibo de Resgate",
+      "route": "common/page/5700",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Consultas e controle",
+      "name": "Verificação de Alterações",
+      "route": "common/page/1632",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Consultas e controle",
+      "name": "Consultas de Títulos",
+      "route": "common/page/2513",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios",
+      "name": "Contas a Receber",
+      "route": "common/page/4803",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios",
+      "name": "Contas Recebidas",
+      "route": "common/page/4929",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Extrato de Cliente anterior",
+      "route": "common/page/1535",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Extrato de Cliente Histórico",
+      "route": "common/page/3012",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Extrato de Cliente novo",
+      "route": "financeiro/contas-receber/relatorios/extratos/extrato-cliente",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Saldo Devedor Presente anterior",
+      "route": "common/page/1579",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Saldo Devedor Presente novo",
+      "route": "financeiro/contas-receber/relatorios/saldo-devedor",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Tabela Price / SAC",
+      "route": "common/page/1537",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Extratos",
+      "name": "Portador",
+      "route": "common/page/5557",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Contratos Anuais",
+      "name": "Repactuação",
+      "route": "common/page/2817",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Contratos Anuais",
+      "name": "Demonstrativo de Resíduo",
+      "route": "common/page/1581",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Contratos Anuais",
+      "name": "Títulos Repactuados",
+      "route": "common/page/5743",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Contratos Anuais",
+      "name": "Reajuste Programado",
+      "route": "common/page/7616",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Condomínios",
+      "name": "Custos Incorridos",
+      "route": "common/page/5300",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Seguros",
+      "name": "Cálculo",
+      "route": "common/page/5086",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Seguros",
+      "name": "Extrato",
+      "route": "common/page/5617",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Saldo de Adiantamento",
+      "name": "Saldo/Extrato de Adiantamento",
+      "route": "common/page/2426",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Cobrança",
+      "name": "Boletos",
+      "route": "common/page/1449",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Cobrança",
+      "name": "Mala Direta",
+      "route": "common/page/2613",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Cobrança",
+      "name": "Recibos",
+      "route": "common/page/2485",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Cobrança",
+      "name": "Etiquetas",
+      "route": "common/page/2785",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Cobrança",
+      "name": "Situação das Parcelas",
+      "route": "common/page/2710",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Títulos",
+      "name": "Distratados / Cancelados",
+      "route": "common/page/4140",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Títulos",
+      "name": "Quitados",
+      "route": "common/page/4145",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Títulos",
+      "name": "Custos Incorridos",
+      "route": "common/page/5300",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Receita Federal",
+      "name": "Imposto de Renda",
+      "route": "common/page/2701",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Cessão de Direitos",
+      "name": "Cessão de Direitos",
+      "route": "common/page/2803",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Cessão de Direitos",
+      "name": "Extrato de Cliente",
+      "route": "common/page/3159",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Títulos em Cobrança",
+      "route": "common/page/3041",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Clientes Sub Judice",
+      "route": "common/page/3050",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Atividades Pendentes",
+      "route": "common/page/3055",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Títulos Inadimplentes",
+      "route": "common/page/2559",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Posição de Inadimplência",
+      "route": "common/page/2872",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Controle de Inadimplência",
+      "name": "Parcelas a Receber/Recebidas por Cliente e Avalista",
+      "route": "common/page/8195",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Reparcelamentos",
+      "name": "Impressão de Aditivos",
+      "route": "common/page/5380",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Saldos",
+      "name": "Posição de Saldos",
+      "route": "common/page/1575",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Saldos",
+      "name": "Valores Médios",
+      "route": "common/page/4150",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Saldos",
+      "name": "Saldo Devedor Mensal",
+      "route": "common/page/4152",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Faturamento",
+      "route": "common/page/1577",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Envio de E-mail",
+      "route": "common/page/8253",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Antecipações / Inadimplências",
+      "route": "common/page/2698",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Valor Presente",
+      "route": "common/page/1573",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Cálculo de Descontos",
+      "route": "common/page/2637",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Formas de Recebimentos",
+      "route": "common/page/2633",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Impostos Retidos",
+      "route": "common/page/3694",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Alocação de Parcelas",
+      "route": "common/page/5598",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Posição de Comercialização",
+      "route": "common/page/2826",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios / Outros / Outros Relatórios",
+      "name": "Previsão de Recebimento Mensal",
+      "route": "common/page/7973",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios Configuráveis",
+      "name": "Contas a Receber",
+      "route": "common/page/4855",
+      "status": "Ausente"
+    },
+    {
+      "area": "Receber",
+      "division": "Relatórios Configuráveis",
+      "name": "Contas Recebidas",
+      "route": "common/page/4863",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Títulos",
+      "route": "common/page/1604",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Consulta de parcelas",
+      "route": "common/page/9102",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Alteração de Títulos/Parcelas",
+      "route": "financeiro/contas-pagar/alteracao-de-titulos-em-massa",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Substituição de Previsão Financeira",
+      "route": "common/page/8293",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Documentos Enviados",
+      "route": "common/page/2598",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Rateio Padrão",
+      "route": "common/page/1245",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Principal",
+      "name": "Aprovação de Títulos por Orçamento",
+      "route": "financeiro/contas-pagar/aprovacao-de-titulos",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Financiamento Bancário",
+      "name": "Financiamento Bancário",
+      "route": "common/page/2848",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Financiamento Bancário",
+      "name": "Juros Pós-fixado",
+      "route": "common/page/7975",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Financiamento Bancário",
+      "name": "Relatório de Financiamento Bancário",
+      "route": "common/page/8078",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Autorização de Pagamento",
+      "name": "Alçadas de Autorização de Pagamento",
+      "route": "common/page/4865",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Autorização de Pagamento",
+      "name": "Ciência de Títulos",
+      "route": "common/page/8498",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Autorização de Pagamento",
+      "name": "Autorização de Pagamento",
+      "route": "common/page/1777",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Autorização de Pagamento",
+      "name": "Autorizações da Parcela",
+      "route": "common/page/4871",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Baixas",
+      "name": "Inclusão",
+      "route": "common/page/1256",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Baixas",
+      "name": "Alteração/Exclusão",
+      "route": "common/page/1428",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Baixas",
+      "name": "Estorno Inclusão",
+      "route": "common/page/4054",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Baixas",
+      "name": "Estorno Exclusão",
+      "route": "common/page/4055",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Alçada",
+      "route": "common/page/1845",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Configuração",
+      "route": "common/page/1786",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Transferências Bancárias",
+      "route": "common/page/1797",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Programações de Pagamento",
+      "route": "common/page/1806",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Autorização de Pagamento",
+      "route": "common/page/1856",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Gerações de Arquivo",
+      "route": "common/page/1909",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Leitura de Arquivo de Retorno",
+      "route": "common/page/1918",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Leitura de Arquivo DDA",
+      "route": "common/page/3222",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural",
+      "name": "Cancelamentos de Lote",
+      "route": "common/page/1882",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural / Relatórios",
+      "name": "Lote de Pagamento Escritural anterior",
+      "route": "common/page/1943",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural / Relatórios",
+      "name": "Lote de Pagamento Escritural novo",
+      "route": "financeiro/contas-pagar/pagamento-escritural/relatorios/lote-pagamento-escritural",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural / Relatórios",
+      "name": "Relatório de Autorizações Pendentes",
+      "route": "common/page/5842",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Pagamento Escritural / Relatórios",
+      "name": "Transferências Bancárias",
+      "route": "common/page/8318",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Administração de Obra",
+      "name": "Cobrança",
+      "route": "common/page/2617",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Administração de Obra",
+      "name": "Importação de Títulos",
+      "route": "common/page/552",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Administração de Obra",
+      "name": "Análise do Comprometido da Obra",
+      "route": "common/page/5448",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Consultas",
+      "name": "Títulos",
+      "route": "common/page/104",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Consultas",
+      "name": "Parcelas",
+      "route": "common/page/1382",
+      "status": "Parcial"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Contas a Pagar",
+      "route": "common/page/1674",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Contas Pagas",
+      "route": "common/page/1843",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Extrato do Credor",
+      "route": "common/page/1780",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Ficha de Compromisso",
+      "route": "common/page/1651",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Autorização de Pagamento",
+      "route": "common/page/1609",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Demonstrativo de Pagamento",
+      "route": "common/page/1815",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Saldos de Credores",
+      "route": "common/page/2423",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Títulos por Data",
+      "route": "common/page/373",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Documentos por Fornecedor",
+      "route": "common/page/123",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Totais por Fornecedor",
+      "route": "common/page/35",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Emissão de Mala Direta",
+      "route": "common/page/2625",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Fiscal",
+      "route": "common/page/37",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Baixas sem Cheques",
+      "route": "common/page/4076",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Administração de Obras Contas a Pagar",
+      "route": "common/page/133",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios",
+      "name": "Documentos com Numeração Repetida",
+      "route": "common/page/5903",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Relatório de ISS",
+      "route": "common/page/1653",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Retenções",
+      "route": "common/page/1669",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Consulta de Retenções nova",
+      "route": "financeiro/contas-pagar/relatorios/impostos/retencoes",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Retenções por Fornecedor",
+      "route": "common/page/1672",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Emissão de Guias",
+      "route": "common/page/1812",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Impostos",
+      "name": "Títulos por Guia de Imposto",
+      "route": "common/page/4916",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Adiantamentos",
+      "name": "Saldo de Adiantamentos",
+      "route": "common/page/1165",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Adiantamentos",
+      "name": "Saldo de Adiantamentos Vinculados",
+      "route": "common/page/660",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios / Adiantamentos",
+      "name": "Detalhamento dos Saldos de Credores",
+      "route": "common/page/2927",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios Configuráveis",
+      "name": "Contas a Pagar",
+      "route": "common/page/3978",
+      "status": "Ausente"
+    },
+    {
+      "area": "Pagar",
+      "division": "Relatórios Configuráveis",
+      "name": "Contas Pagas",
+      "route": "common/page/4891",
+      "status": "Ausente"
+    }
+  ]
+}
