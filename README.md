@@ -1,6 +1,6 @@
 # Comercial imobiliário
 
-Versão 0.4.2 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+Versão 0.5.0 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
 
 O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
 
@@ -14,7 +14,7 @@ Consulte [a cobertura e as diferenças desta versão](docs/cobertura-v0.4.md). O
 
 O [diagnóstico de integração](docs/diagnostico-integracao.md) registra as conexões entre todas as áreas e as pendências. A revisão unifica as APIs antiga/nova de contratos e comissões, vincula reservas e propostas aos cadastros, permite converter reserva em proposta e corrige estoque, aditivos pendentes e filtros. 33 testes aprovados.
 
-## Campos obrigatórios 0.4.2
+## Campos obrigatórios 0.5.0
 
 [Campos com asterisco](docs/campos-obrigatorios.md) agora bloqueiam o salvamento na tela e na API. A verificação inclui abas fechadas e listas. Unidades e contratos foram conferidos no Sienge; cadastros antigos são preservados. Importações e emissão pela proposta também exigem os complementos obrigatórios. 41 testes aprovados.
 
@@ -99,3 +99,7 @@ Ainda pendentes: edição de unidades e clientes, posição histórica do Quadro
 A camada de regras (`domain.mjs`) é separada da API (`server.mjs`) e da interface (`public/`). A integração com o projeto do escritório deverá definir identidade compartilhada, códigos de empresas e empreendimentos, clientes, corretores e contrato de comunicação com o financeiro. Alterar tecnologia deve preservar essas regras e seus testes.
 
 Use dados fictícios nos testes. Não publique banco de dados, credenciais ou dados reais no repositório.
+
+## Contabilidade — versão 0.5.0
+
+Plano de contas, lotes por empresa/período, lançamentos com partidas, contabilização, estorno, Diário, Razão e Balancete. Integração explícita com contratos emitidos e baixas de comissões, com escolha de contas e prevenção de duplicidade. Campos obrigatórios são validados na tela e API; lotes fechados bloqueiam escrita. Escopo implementado e recursos restantes em [docs/contabilidade.md](docs/contabilidade.md).

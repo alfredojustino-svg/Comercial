@@ -2,6 +2,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
 import { workflow } from './workflow.mjs';
 import { sales } from './sales.mjs';
+import { accounting } from './accounting.mjs';
 import {missingRequired} from './public/form-validation.mjs';
 
 export const commercialStatuses = ['Disponível', 'Reserva técnica', 'Permuta', 'Mútuo', 'Transferido', 'Vendido/terceiros'];
@@ -68,5 +69,6 @@ export function createStore(file=':memory:', {seed=true, clock=today}={}) {
     if(available[1])flows.addProposal({clientId:demoClient.id,unitId:available[1].id,broker:'Corretor Demonstração',price:available[1].price,expires:due,note:'Proposta em elaboração para demonstração.'});
   }
   const core={...flows,listUnits,addUnit,reserve,cancel,listReservations};
-  return {...core,...sales(db,clock,core),close:()=>db.close()};
+  const commercial={...core,...sales(db,clock,core)};
+  return {...commercial,...accounting(db,clock,commercial,ValidationError),close:()=>db.close()};
 }
