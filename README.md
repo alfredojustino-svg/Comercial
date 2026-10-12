@@ -1,8 +1,12 @@
 # Comercial imobiliário
 
-Versão 0.6.0 independente do módulo comercial, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
+Versão 0.7.0 com Comercial, Contabilidade e Financeiro integrados, baseada no levantamento funcional do ERP de referência. Aplicação local com Node.js 24, SQLite e interface web em português. Sem dependências externas.
 
 O [levantamento de Vendas e Comissões](docs/levantamento-vendas-comissoes.md), atualizado em 11/10/2026, compara os formulários do ERP com esta versão e identifica campos, processos e validações que faltam. A aplicação ainda não reproduz integralmente o Comercial do ERP.
+
+## Integração 0.7.0
+
+Baixas de contratos e comissões pela interface seguem para o Financeiro. Distratos geram devoluções a pagar, com baixa parcial e estorno compartilhados. Origens contabilizadas exigem estorno antes de alterações; uma origem estornada pode ser contabilizada novamente preservando o histórico. A tela Financeiro → Conferência de Integrações mostra classificação pendente, diferenças bancárias e pagamentos antigos sem vínculo. 69 testes aprovados. Veja [o fechamento da integração e os limites](docs/fechamento-integracao.md).
 
 ## Ampliação 0.4
 

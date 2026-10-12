@@ -17,6 +17,8 @@ export function createServer(store) {
           if(!req.headers['content-type']?.startsWith('application/json'))return send(415,{error:'Envie JSON.'});
         }
         let body={};if(req.method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>1048576)throw new ValidationError('Pedido muito grande.',413);}try{body=JSON.parse(raw);}catch{throw new ValidationError('JSON inválido.',400);}if(!body||typeof body!=='object'||Array.isArray(body))throw new ValidationError('Objeto JSON esperado.',400);}
+        if(path==='/api/integration/report'&&req.method==='GET')return send(200,store.integrationReport());
+        if(path==='/api/integration/refundSchedule'&&req.method==='POST')return send(200,store.salesScheduleRefund(body.id,body));
         const financeRoute=path.match(/^\/api\/finance\/([a-zA-Z]+)(?:\/([\w-]+)\/(action|history))?$/);
         if(financeRoute){const [,kind,id,action]=financeRoute;if(id&&action==='action'&&req.method==='POST')return send(200,store.financeAction(kind,id,body));if(id&&action==='history'&&req.method==='GET')return send(200,store.financeHistory(id));if(!id&&req.method==='POST'&&kind==='settle')return send(200,store.financeSettle(body));if(!id&&req.method==='POST'&&kind==='transfer')return send(200,store.financeTransfer(body));if(!id&&req.method==='POST'&&kind==='report')return send(200,store.financeReport(body));if(!id&&req.method==='GET')return send(200,store.financeList(kind));if(!id&&req.method==='POST')return send(201,store.financeSave(kind,body));return send(405,{error:'Método não permitido.'});}
         const accountingRoute=path.match(/^\/api\/accounting\/([a-zA-Z]+)(?:\/([\w-]+)\/(action|history))?$/);
