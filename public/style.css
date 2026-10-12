@@ -8,3 +8,5 @@
 .required-mark{color:#c32929;font-weight:700}.field-caption{display:block}.required-help{margin:0 0 18px}[aria-invalid="true"]{border-color:#c32929!important;outline-color:#c32929}.form-error{white-space:pre-line}
 
 [hidden]{display:none!important}
+
+.module-menu{margin-bottom:12px}.module-menu>summary{padding:12px 8px;font-size:15px;font-weight:700;color:#34383d;cursor:pointer;border-bottom:1px solid #e3e5e8}.module-menu>summary::marker{color:#e00010}.module-menu>.nav-group{margin:4px 0 6px 10px}.module-menu>.nav-group>summary{font-size:13px}.module-menu>button{margin-left:8px;width:calc(100% - 8px)}@media(max-width:700px){.sidebar nav{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.module-menu>summary{font-size:13px}.module-menu>.nav-group{margin-left:4px}}
